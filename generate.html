@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp QR Code</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        #whatsappLinkContainer {
+            width: 100ch;
+        }
+
+        #whatsappLink {
+            cursor: pointer;
+            word-wrap: break-word;
+        }
+
+        #whatsappLink:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="qrcode"></div>
+    <div>
+        <div id="whatsappLinkContainer">
+            <p id="whatsappLink"></p>
+        </div>
+    </div>
+    <script>
+        function generateWhatsAppLink(phoneNumber, content) {
+            phoneNumber = phoneNumber.replace(/\D/g, "");
+            var whatsappLink =
+                "https://wa.me/" +
+                phoneNumber +
+                "?text=" +
+                encodeURIComponent(content);
+
+            return whatsappLink;
+        }
+
+        // Hardcoded value
+        var phoneNumber = "+60123456789";
+        var content = `String`;
+
+        var whatsappLink = generateWhatsAppLink(phoneNumber, content);
+        console.log(whatsappLink);
+        document.getElementById("whatsappLink").textContent = whatsappLink;
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: whatsappLink,
+            width: 128,
+            height: 128,
+        });
+
+        var whatsappLinkElement = document.getElementById("whatsappLink");
+        whatsappLinkElement.textContent = whatsappLink;
+
+        whatsappLinkElement.addEventListener("click", function () {
+            copyToClipboard(whatsappLink);
+            alert("Copied toi clipboard");
+        });
+
+        function copyToClipboard(text) {
+            var textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+
+</html>
