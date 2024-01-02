@@ -46,7 +46,6 @@
         var content = `String`;
 
         var whatsappLink = generateWhatsAppLink(phoneNumber, content);
-        console.log(whatsappLink);
         document.getElementById("whatsappLink").textContent = whatsappLink;
 
         var qrcode = new QRCode(document.getElementById("qrcode"), {
