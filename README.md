@@ -1,2 +1,2 @@
 # generate-ws-link
-Generate ws link and QR Code
+Generate whatsapp link with message and QR Code
